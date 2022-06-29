@@ -12,6 +12,9 @@ on:
 jobs:
   build_windows:
     runs-on: windows-latest
+    strategy:
+      matrix:
+        dotnet-version: [ '3.1.x', '6.0.x' ]
     steps:
     - uses: actions/checkout@v2
     - uses: dorny/paths-filter@v2.2.0
@@ -32,11 +35,12 @@ jobs:
       if: steps.filter.outputs.src == 'true'
 
     - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: |
-          3.1.x
-          5.0.x
+        dotnet-version: ${{ matrix.dotnet-version }}
+
+    - name: Display dotnet version
+      run: dotnet --version
 
     - name: Install dependencies
       run: dotnet restore
@@ -45,5 +49,4 @@ jobs:
       run: dotnet build --configuration Release --no-restore
 
     - name: Test
-      run: dotnet test --no-restore
-
+      run: dotnet test --no-restore --verbosity detailed
