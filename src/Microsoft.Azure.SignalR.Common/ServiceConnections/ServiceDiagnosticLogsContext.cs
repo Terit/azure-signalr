@@ -3,7 +3,7 @@
 
 namespace Microsoft.Azure.SignalR
 {
-    public class ServiceDiagnosticLogsContext
+    internal class ServiceDiagnosticLogsContext
     {
         public bool EnableMessageLog { get; set; } = false;
     }

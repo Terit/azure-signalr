@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace Microsoft.Azure.SignalR
 {
-    public class ServiceConnectionContainerScope : IDisposable
+    internal class ServiceConnectionContainerScope : IDisposable
     {
         public static bool IsScopeEstablished => _asyncLocal.Value != null;
 

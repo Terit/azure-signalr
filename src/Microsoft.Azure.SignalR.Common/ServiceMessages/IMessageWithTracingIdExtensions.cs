@@ -9,11 +9,11 @@ namespace Microsoft.Azure.SignalR
     {
         public static T WithTracingId<T>(this T message) where T : IMessageWithTracingId
         {
-            if (ServiceConnectionContainerScope.EnableMessageLog || ClientConnectionScope.IsDiagnosticClient)
-            {
+            //if (ServiceConnectionContainerScope.EnableMessageLog || ClientConnectionScope.IsDiagnosticClient)
+            //{
                 var id = MessageWithTracingIdHelper.Generate();
                 message.TracingId = id;
-            }
+            //}
             return message;
         }
     }
